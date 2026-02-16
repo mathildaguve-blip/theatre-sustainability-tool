@@ -1,4 +1,4 @@
-/* Allmän stil */
+/* Grundläggande styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,24 +6,29 @@ body {
     background-color: #f4f4f4;
 }
 
-h1 {
+h1, h2 {
     color: #333;
 }
 
+#app {
+    max-width: 800px;
+    margin: auto;
+}
+
 h2 {
-    color: #555;
+    margin-top: 20px;
 }
 
 label {
-    margin-top: 10px;
     display: block;
+    margin-top: 10px;
 }
 
 input {
     display: block;
-    margin: 10px 0;
+    width: 100%;
     padding: 8px;
-    width: 250px;
+    margin: 10px 0;
 }
 
 .autocomplete-list {
@@ -32,7 +37,7 @@ input {
     overflow-y: auto;
     background: white;
     position: absolute;
-    width: 250px;
+    width: 100%;
     z-index: 999;
 }
 
@@ -42,5 +47,15 @@ input {
 }
 
 .autocomplete-list div:hover {
+    background-color: #f0f0f0;
+}
+
+#result {
+    margin-top: 20px;
+    background: #e0f7fa;
+    padding: 15px;
+    border-radius: 5px;
+}
+
     background-color: #f0f0f0;
 }
