@@ -1,62 +1,77 @@
 /* Grundläggande styling */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
     background-color: #f4f4f4;
-}
-
-h1, h2 {
     color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-#app {
-    max-width: 800px;
-    margin: auto;
+/* Styling för huvudrubrik */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+}
+
+/* Styling för varje sektion */
+#kostymStep, #maskStep, #scenografiStep {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
 }
 
-label {
-    display: block;
+/* Styling för knappar */
+button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Styling för listor */
+#kostymList, #maskList, #scenografiList {
     margin-top: 10px;
 }
 
-input {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-}
-
-.autocomplete-list {
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    background: white;
-    position: absolute;
-    width: 100%;
-    z-index: 999;
-}
-
-.autocomplete-list div {
-    padding: 8px;
-    cursor: pointer;
-}
-
-.autocomplete-list div:hover {
-    background-color: #f0f0f0;
-}
-
-#result {
-    margin-top: 20px;
-    background: #e0f7fa;
-    padding: 15px;
+.item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 
-    background-color: #f0f0f0;
+/* Styling för input-fält och formulär */
+input[type="text"], input[type="number"] {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
+
+/* Styling för layout */
+#app {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 
