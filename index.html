@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<title>Hållbarhetskalkylator</title>
-<script type="module" src="index.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hållbarhetskalkylator</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="index.js" defer></script>
 </head>
 <body>
-<h1>Hållbarhetskalkylator</h1>
-<div id="app"></div>
+    <h1>Hållbarhetskalkylator</h1>
+    
+    <div id="app">
+        <h2>Välj material och butik</h2>
+        
+        <!-- Här kommer inputfält för material, butik, och land -->
+        <label>Välj material:</label>
+        <input id="materialInput" placeholder="Sök material...">
+        
+        <label>Välj butik:</label>
+        <input id="shopInput" placeholder="Sök butik...">
+        
+        <label>Välj land:</label>
+        <input id="countryInput" placeholder="Sök land...">
+    </div>
 </body>
 </html>
