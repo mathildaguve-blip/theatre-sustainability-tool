@@ -1,0 +1,6 @@
+materials = [
+    "bomull", "silke", "linne", "ull", "polyester", "acetat",
+    "akryl", "läder", "fuskpäls", "latex", "smink", "färg",
+    "lim", "väggfärg", "textilfärg", "patinering", "trä",
+    "metall", "plast", "kartong", "skumplast", "papper"
+]
