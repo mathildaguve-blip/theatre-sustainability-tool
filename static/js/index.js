@@ -1,74 +1,113 @@
-// Skapa listor för kostymer, masker och rekvisita
-let kostymer = [];
-let masker = [];
-let rekvisita = [];
-
-// Vänta tills sidan är laddad
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Lägg till en kostym
+    let items = [];
+
+    // Klimatdata
+    const materialImpact = {
+        bomull: 5,
+        polyester: 9,
+        ull: 8,
+        siden: 6
+    };
+
+    const countryMultiplier = {
+        sverige: 1,
+        kina: 1.8,
+        usa: 1.5,
+        indien: 1.6,
+        italien: 1.2
+    };
+
+    const transportPerKm = 0.02; // kg CO2 per km per kg
+
+    const shopOrigin = {
+        "h&m": "sverige",
+        "shein": "kina"
+    };
+
     document.getElementById("addKostym").addEventListener("click", function () {
-        let kostymName = prompt("Skriv in kostymens namn:");
-        if (kostymName) {
-            let kostym = { name: kostymName };
-            kostymer.push(kostym);
-            renderList();
+
+        let name = prompt("Namn:");
+        if (!name) return;
+
+        let material = prompt("Material (bomull, polyester, ull, siden):").toLowerCase();
+        if (!materialImpact[material]) {
+            alert("Okänt material");
+            return;
         }
+
+        let weight = parseFloat(prompt("Vikt i kg:"));
+        if (isNaN(weight)) return;
+
+        let shop = prompt("Butik (H&M, Shein, Etsy, eBay, Vinted):").toLowerCase();
+
+        let country;
+
+        // Om det är en känd kedja
+        if (shopOrigin[shop]) {
+            country = shopOrigin[shop];
+        } else {
+            // Marketplace → fråga användaren
+            country = prompt("Vilket land skickades det från?").toLowerCase();
+            if (!countryMultiplier[country]) {
+                alert("Okänt land");
+                return;
+            }
+        }
+
+        let distance = parseFloat(prompt("Ungefärlig fraktsträcka i km:"));
+        if (isNaN(distance)) return;
+
+        // Beräkning
+        let productionImpact =
+            weight * materialImpact[material] * countryMultiplier[country];
+
+        let transportImpact =
+            weight * distance * transportPerKm;
+
+        let totalCO2 = productionImpact + transportImpact;
+
+        items.push({
+            name,
+            material,
+            weight,
+            shop,
+            country,
+            totalCO2
+        });
+
+        render();
     });
 
-    // Lägg till en mask
-    document.getElementById("addMask").addEventListener("click", function () {
-        let maskName = prompt("Skriv in maskens namn:");
-        if (maskName) {
-            let mask = { name: maskName };
-            masker.push(mask);
-            renderList();
-        }
-    });
+    function render() {
 
-    // Lägg till rekvisita
-    document.getElementById("addRekvisita").addEventListener("click", function () {
-        let rekvisitaName = prompt("Skriv in rekvisitans namn:");
-        if (rekvisitaName) {
-            let rekvisitaItem = { name: rekvisitaName };
-            rekvisita.push(rekvisitaItem);
-            renderList();
-        }
-    });
+        let list = document.getElementById("kostymList");
+        list.innerHTML = "";
+
+        let total = 0;
+
+        items.forEach(item => {
+
+            total += item.totalCO2;
+
+            let div = document.createElement("div");
+            div.innerHTML = `
+                <strong>${item.name}</strong><br>
+                Material: ${item.material}<br>
+                Butik: ${item.shop}<br>
+                Ursprungsland: ${item.country}<br>
+                CO₂: ${item.totalCO2.toFixed(2)} kg
+                <hr>
+            `;
+
+            list.appendChild(div);
+        });
+
+        document.getElementById("result").innerHTML = `
+            <h2>Total klimatpåverkan</h2>
+            <p>${total.toFixed(2)} kg CO₂</p>
+        `;
+    }
 
 });
 
-// Rendera listorna på sidan
-function renderList() {
-
-    // Kostymer
-    let kostymList = document.getElementById("kostymList");
-    kostymList.innerHTML = "";
-    kostymer.forEach(function (kostym) {
-        let item = document.createElement("div");
-        item.classList.add("item");
-        item.innerHTML = "<strong>" + kostym.name + "</strong>";
-        kostymList.appendChild(item);
-    });
-
-    // Masker
-    let maskList = document.getElementById("maskList");
-    maskList.innerHTML = "";
-    masker.forEach(function (mask) {
-        let item = document.createElement("div");
-        item.classList.add("item");
-        item.innerHTML = "<strong>" + mask.name + "</strong>";
-        maskList.appendChild(item);
-    });
-
-    // Rekvisita
-    let scenografiList = document.getElementById("scenografiList");
-    scenografiList.innerHTML = "";
-    rekvisita.forEach(function (rekvisitaItem) {
-        let item = document.createElement("div");
-        item.classList.add("item");
-        item.innerHTML = "<strong>" + rekvisitaItem.name + "</strong>";
-        scenografiList.appendChild(item);
-    });
-
-}
