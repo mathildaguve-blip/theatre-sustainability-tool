@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hållbarhetskalkylator</title>
-    <!-- Länk till CSS-filen som finns i css/ mappen -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Länk till JavaScript-filen som finns i js/ mappen -->
-    <script type="module" src="js/index.js" defer></script>
+
+    <!-- Flask-version av CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Flask-version av JavaScript -->
+    <script type="module" src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 </head>
+
 <body>
     <h1>Hållbarhetskalkylator</h1>
     
     <div id="app">
+
         <!-- Steg 1: Kostym -->
         <div id="kostymStep">
             <h2>Kostym</h2>
@@ -35,8 +39,13 @@
         </div>
         
         <!-- Resultat -->
-        <div id="result"></div>
+        <div id="result">
+            <h2>Resultat</h2>
+            <p>Inget beräknat ännu</p>
+        </div>
+
     </div>
 </body>
 </html>
+
 
