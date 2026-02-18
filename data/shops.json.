@@ -41,7 +41,7 @@
   {"name":"Donation från privatperson","ort":"Privat","type":"donation"},
   {"name":"Teaterförråd (återbruk)","ort":"Intern","type":"återbruk"},
   {"name":"Produktionens eget lager","ort":"Intern","type":"lager"},
-  {"name":"Arv / privat ägo","ort":"Privat","type":"återbruk"}
+  {"name":"Arv / privat ägo","ort":"Privat","type":"återbruk"},
   {"name":"Röda Tråden","ort":"Stockholm","type":"tyg och sybehör"},
   {"name":"Folckers","ort":"Stockholm","type":"sybehör"},
   {"name":"Rydströms","ort":"Stockholm","type":"sybehör"},
@@ -50,7 +50,7 @@
   {"name":"Zalando","ort":"Stockholm","type":"Kläder"},
   {"name":"Temu","ort":"Stockholm","type":"Kläder m.m."},
   {"name":"Fruugo","ort":"Stockholm","type":"Kläder m.m."},
-  {"name":"Shein","ort":"Stockholm","type":"kläder m.m."},
+  {"name":"Shein","ort":"Stockholm","type":"kläder m.m."}
 
 ]
 
