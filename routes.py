@@ -1,7 +1,7 @@
 from flask import request, jsonify
-from material_data import materials
-from shop_data import shops
-from countries_data import countries
+from material.data import materials
+from shop.data import shops
+from countries.data import countries
 from models import db, SustainableObject, MaterialEntry
 
 def init_routes(app):
