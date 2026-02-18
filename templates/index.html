@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hållbarhetskalkylator</title>
 
-    <!-- Flask-version av CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <!-- Flask-version av JavaScript -->
-    <script type="module" src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 </head>
 
 <body>
@@ -17,28 +17,24 @@
     
     <div id="app">
 
-        <!-- Steg 1: Kostym -->
         <div id="kostymStep">
             <h2>Kostym</h2>
             <button id="addKostym">Lägg till Kostym</button>
             <div id="kostymList"></div>
         </div>
         
-        <!-- Steg 2: Mask -->
         <div id="maskStep">
             <h2>Mask</h2>
             <button id="addMask">Lägg till Mask/Peruk</button>
             <div id="maskList"></div>
         </div>
         
-        <!-- Steg 3: Scenografi -->
         <div id="scenografiStep">
             <h2>Scenografi</h2>
             <button id="addRekvisita">Lägg till Rekvisita</button>
             <div id="scenografiList"></div>
         </div>
-        
-        <!-- Resultat -->
+
         <div id="result">
             <h2>Resultat</h2>
             <p>Inget beräknat ännu</p>
