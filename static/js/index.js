@@ -2,12 +2,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let items = [];
 
-    // Klimatdata
+    // Klimatdata per kg
     const materialImpact = {
         bomull: 5,
         polyester: 9,
         ull: 8,
         siden: 6
+    };
+
+    // Omräkning meter → kg (ungefärliga värden)
+    const meterToKg = {
+        bomull: 0.2,
+        polyester: 0.25,
+        ull: 0.3,
+        siden: 0.15
+    };
+
+    // Styckvikt (ungefärlig)
+    const pieceWeight = {
+        knapp: 0.01,
+        sko: 0.8,
+        hatt: 0.3
     };
 
     const countryMultiplier = {
@@ -18,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         italien: 1.2
     };
 
-    const transportPerKm = 0.02; // kg CO2 per km per kg
+    const transportPerKm = 0.02;
 
     const shopOrigin = {
         "h&m": "sverige",
@@ -36,18 +51,42 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        let weight = parseFloat(prompt("Vikt i kg:"));
-        if (isNaN(weight)) return;
+        let unitType = prompt("Enhet? (kg, meter, styck)").toLowerCase();
+
+        let quantity = parseFloat(prompt("Hur mycket?"));
+        if (isNaN(quantity)) return;
+
+        let weightKg = 0;
+
+        if (unitType === "kg") {
+            weightKg = quantity;
+        }
+
+        else if (unitType === "meter") {
+            weightKg = quantity * meterToKg[material];
+        }
+
+        else if (unitType === "styck") {
+            let piece = prompt("Vad är det för typ? (knapp, sko, hatt)").toLowerCase();
+            if (!pieceWeight[piece]) {
+                alert("Okänd stycktyp");
+                return;
+            }
+            weightKg = quantity * pieceWeight[piece];
+        }
+
+        else {
+            alert("Ogiltig enhet");
+            return;
+        }
 
         let shop = prompt("Butik (H&M, Shein, Etsy, eBay, Vinted):").toLowerCase();
 
         let country;
 
-        // Om det är en känd kedja
         if (shopOrigin[shop]) {
             country = shopOrigin[shop];
         } else {
-            // Marketplace → fråga användaren
             country = prompt("Vilket land skickades det från?").toLowerCase();
             if (!countryMultiplier[country]) {
                 alert("Okänt land");
@@ -55,24 +94,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        let distance = parseFloat(prompt("Ungefärlig fraktsträcka i km:"));
+        let distance = parseFloat(prompt("Fraktsträcka i km:"));
         if (isNaN(distance)) return;
 
-        // Beräkning
         let productionImpact =
-            weight * materialImpact[material] * countryMultiplier[country];
+            weightKg * materialImpact[material] * countryMultiplier[country];
 
         let transportImpact =
-            weight * distance * transportPerKm;
+            weightKg * distance * transportPerKm;
 
         let totalCO2 = productionImpact + transportImpact;
 
         items.push({
             name,
-            material,
-            weight,
-            shop,
-            country,
             totalCO2
         });
 
@@ -93,9 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
             let div = document.createElement("div");
             div.innerHTML = `
                 <strong>${item.name}</strong><br>
-                Material: ${item.material}<br>
-                Butik: ${item.shop}<br>
-                Ursprungsland: ${item.country}<br>
                 CO₂: ${item.totalCO2.toFixed(2)} kg
                 <hr>
             `;
@@ -108,6 +139,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>${total.toFixed(2)} kg CO₂</p>
         `;
     }
+
+});
+
 
 });
 
